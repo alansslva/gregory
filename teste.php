@@ -1,5 +1,37 @@
 <?php 
 
+
+$name 		= $_POST["name"];
+$document 	= $_POST["document"];
+$email 		= $_POST["email"];
+$phone 		= $_POST["phone"];
+$addres 	= $_POST["addres"];
+
+
+include ('connection/db.php');
+
+
+$sql =  "INSERT INTO `mydb`.`people`
+(`name`,
+`document`,
+`email`,
+`phone`,
+`addres`)
+VALUES
+('".$name."',
+'".$document."',
+'".$email."',
+'".$phone."',
+'".$addres."')";
+
+mysqli_query($con,$sql);
+
+mysqli_close($con); 
+?>
+
+
+<?php 
+
 require 'Class/Product.php';
 require 'Class/Config.php';
 
@@ -38,7 +70,7 @@ $product = new Product();
 
   	<div class="container">
 
-
+	<div class="alert alert-success" role="alert">Pessoa Cadastrada com sucesso <a href="pages/create-customer.php">Clique Aqui para realizar um novo cadastro</a> </div>
   	
 
   	</div>

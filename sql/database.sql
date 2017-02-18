@@ -18,7 +18,7 @@ USE `mydb` ;
 -- Table `mydb`.`types`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`types` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -28,7 +28,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`prodcuts`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`prodcuts` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `price` VARCHAR(45) NULL,
   `types_id` INT NOT NULL,
@@ -46,7 +46,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`people`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`people` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `document` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
@@ -60,7 +60,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`operations`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`operations` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `num_operation` VARCHAR(45) NULL,
   `total_value` VARCHAR(45) NULL,
   `type_operations` CHAR NULL,
@@ -79,7 +79,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`product_operations`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`product_operations` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `price` VARCHAR(45) NULL,
   `qtd` DECIMAL(5,2) NULL,
   `total_value` DECIMAL(5,2) NULL,

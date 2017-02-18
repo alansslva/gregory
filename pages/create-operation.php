@@ -1,11 +1,16 @@
 <?php 
 
-require 'Class/Product.php';
-require 'Class/Config.php';
 
-$product = new Product();
+include ('../connection/db.php');
+
+
+$people = mysqli_query($con, 'SELECT * FROM mydb.people' );
+
+$row = mysqli_fetch_array($people);
+
 
 ?>
+
 
 
 <!DOCTYPE html>
@@ -20,7 +25,7 @@ $product = new Product();
 
 
 	<!-- Bootstrap -->
-	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,13 +38,27 @@ $product = new Product();
 
 
   	<!-- NAVBAR -->
-  	<?php  include('layout/navbar.php') ?>
+  	<?php  include('../layout/navbar.php') ?>
 
 
   	<div class="container">
 
+  		<h1>Cadastrar Cliente</h1>
 
-  	
+  		<form action="#" method="POST">
+
+  			<div class="col-md-6">
+
+  				<select name="people_id" id="" class="form-control">
+  				<?php while ($row = mysqli_fetch_array($people)):?>
+  						<option value="<?= $row['id'] ?>"><?=  $row['name'] ?></option>
+  					<?php endwhile ?>
+  				</select>
+
+
+  			</div>
+
+  		</form>
 
   	</div>
 
@@ -52,6 +71,6 @@ $product = new Product();
   	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   	<!-- Include all compiled plugins (below), or include individual files as needed -->
-  	<script src="bootstrap/js/bootstrap.min.js"></script>
+  	<script src="../bootstrap/js/bootstrap.min.js"></script>
   </body>
   </html>
