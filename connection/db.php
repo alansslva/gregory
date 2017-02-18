@@ -2,4 +2,4 @@
 
 
 
-$con = mysqli_connect("localhost", "homestead", "secret") or print (mysql_error()); 
+$con = mysqli_connect("localhost", "root", "",'mydb') or print (mysql_error()); 

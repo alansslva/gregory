@@ -23,7 +23,7 @@ $config = new Config();
 
  <div class="container">
 
-  <h1>Cadastrar Cliente</h1>
+  <h1>Cadastrar Produto</h1>
 
   <form action="<?=  $config->baseUrl('pages/store-customer') ?>" method="POST">
 
