@@ -1,3 +1,13 @@
+<?php 
+
+require 'Class/Product.php';
+require 'Class/Config.php';
+
+$product = new Product();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +17,10 @@
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<title>Gregory</title>
 
+
+
 	<!-- Bootstrap -->
-	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,7 +43,7 @@
   					<span class="icon-bar"></span>
   					<span class="icon-bar"></span>
   				</button>
-  				<a class="navbar-brand" href="#">Brand</a>
+  				<a class="navbar-brand" href="#"><?=  $product->get() ?></a>
   			</div>
 
   			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -79,7 +91,7 @@
   	<div class="container">
 
 
-  		<h1>Projeto 1.0</h1>
+  		<h1><?=  projectName() ?></h1>
 
 
   		<ul>
@@ -88,6 +100,32 @@
   			<li>Item 3</li>
   			<li>Item 4</li>
   		</ul>
+
+
+
+  		<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
   		
 
   	</div>
@@ -101,6 +139,6 @@
   	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   	<!-- Include all compiled plugins (below), or include individual files as needed -->
-  	<script src="/bootstrap/js/bootstrap.min.js"></script>
+  	<script src="bootstrap/js/bootstrap.min.js"></script>
   </body>
   </html>
