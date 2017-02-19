@@ -32,7 +32,7 @@ $product_row =  mysqli_num_rows($product_list);
 
  <div class="container">
 
-  <h1>Cadastrar Cliente</h1>
+  <h1>Cadastrar Operacao</h1>
 
   <form action="<?=  $config->baseUrl('pages/store-customer') ?>" method="POST">
 
