@@ -1,12 +1,19 @@
 <?php 
 
-// CHAMAR CLASSE DO BBANCO DE DADOS
-require '../Class/Database.php';
-
 
 
 
 class People {
+
+	function getList(){
+		$database = new Database();
+
+		$sql =  'SELECT * FROM people';
+
+		$result = $database->transaction($sql);
+
+		return $result;
+	}
 
 
 	function store($name, $document, $email, $phone, $addres){

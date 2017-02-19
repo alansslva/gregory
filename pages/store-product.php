@@ -4,21 +4,20 @@
 require '../Class/Database.php';
 //REQUIRE DE CLASSES
 require '../Class/Config.php';
-require '../Class/People.php';
+require '../Class/Product.php';
 
 
 // PEGAR VARIAVEIS DO POST
 $name 		   		= $_POST["name"];
-$document 	 		= $_POST["document"];
-$email 		   		= $_POST["email"];
-$phone 		   		= $_POST["phone"];
-$addres 	   		= $_POST["addres"];
+$types_id 	 		= $_POST["types_id"];
+$price 		   		= $_POST["price"];
+
 
 // INSTANCIAR NOVO OBJETO DO TIPO PESSOA
-$people = new People();
+$product = new Product();
 
 // CHAMAR FUNCAO STORE DA CLASSE PESSOA
-$people->store($name, $document, $email, $phone, $addres);
+$product->store($name, $types_id, $price);
 
 
 // instanciar objeto de configuracao

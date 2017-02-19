@@ -1,76 +1,165 @@
 <?php 
+// CHAMAR CLASSE DO BBANCO DE DADOS
+require '../Class/Database.php';
+require '../Class/Product.php';
+require '../Class/People.php';
+require '../Class/Config.php';
 
+$product = new Product();
+$config = new Config();
+$people = new People();
 
-include ('../connection/db.php');
+$people_list = $people->getList();
+$people_row =  mysqli_num_rows($people_list);
 
-
-$people = mysqli_query($con, 'SELECT * FROM mydb.people' );
-
-$row = mysqli_fetch_array($people);
-
+$product_list = $product->getList();
+$product_row =  mysqli_num_rows($product_list);
 
 ?>
-
 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<title>Gregory</title>
+  <?php  include('../layout/head.php') ?>
+</head>
+<body>
+
+
+ <!-- NAVBAR -->
+ <?php  include('../layout/navbar.php') ?>
+
+
+ <div class="container">
+
+  <h1>Cadastrar Cliente</h1>
+
+  <form action="<?=  $config->baseUrl('pages/store-customer') ?>" method="POST">
+
+    <div class="row">
+
+
+      <div class="col-md-5">
+
+        <div class="form-group">
+
+          <label for="">Pessoa</label>
+          <select class="form-control" name="people_id" required>
+            <option>
+             <?php while($people_row = mysqli_fetch_assoc($people_list)):?>
+              <option value="<?= $people_row['id'] ?>"><?= $people_row['name'] ?></option>
+            <?php endwhile ?>
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-5">
+
+      <div class="form-group">
+
+        <label for="">Produto</label>
+        <select class="form-control" name="product_id" id="product_id" required>
+          <option value=""></option>
+          <?php while($product_row = mysqli_fetch_assoc($product_list)):?>
+            <option value="<?= $product_row['id'] ?>"><?= $product_row['name'] ?></option>
+          <?php endwhile ?>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-2">
+
+      <div class="form-group">
+
+        <label for="">Preco</label>
+        <input class="form-control" type="text" readonly="" name="price" id="price">
+
+      </div>
+
+    </div>
+
+    <div class="col-md-2 col-md-offset-3">
+
+      <div class="form-group">
+
+        <label for="">Tipo</label>
+        <select name="type_operation" id="" class="form-control">
+          <option value="COMPRA">COMPRA</option>
+          <option value="VENDA">VENDA</option>
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-2">
+
+      <div class="form-group">
+
+        <label for="">Qtd</label>
+        <input class="form-control" type="text" name="qtd" id="qtd">
+
+      </div>
+
+    </div>
+
+    <div class="col-md-2">
+
+      <div class="form-group">
+
+        <label for="">Total</label>
+        <input id="total_value" class="form-control" type="text" name="total_value" readonly>
+
+      </div>
+
+    </div>
+
+
+    <div class="col-md-12">
+
+      <div class="form-group">
+
+        <button type="submit" class="btn btn-lg btn-success btn-block">Salvar</button>
+
+      </div>
+
+    </div>
+
+
+  </div>
+</form>
+
+</div>
 
 
 
-	<!-- Bootstrap -->
-	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-  </head>
-  <body>
-
-
-  	<!-- NAVBAR -->
-  	<?php  include('../layout/navbar.php') ?>
-
-
-  	<div class="container">
-
-  		<h1>Cadastrar Cliente</h1>
-
-  		<form action="#" method="POST">
-
-  			<div class="col-md-6">
-
-  				<select name="people_id" id="" class="form-control">
-  				<?php while ($row = mysqli_fetch_array($people)):?>
-  						<option value="<?= $row['id'] ?>"><?=  $row['name'] ?></option>
-  					<?php endwhile ?>
-  				</select>
-
-
-  			</div>
-
-  		</form>
-
-  	</div>
 
 
 
 
+<?php  include('../layout/scripts.php') ?>
+
+<script>
+
+ $('#product_id').on('change', function() {
+  // alert( this.value );
+  $.get('<?= $config->baseUrl('functions/get_price_product?product_id=') ?>' + this.value , function(data) {
+   $('#price').val(data);
+   console.log(data);
+ });
+})
 
 
 
-  	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  	<!-- Include all compiled plugins (below), or include individual files as needed -->
-  	<script src="../bootstrap/js/bootstrap.min.js"></script>
-  </body>
-  </html>
+ $('#qtd').keyup(function() {
+   $('#total_value').val( parseFloat($('#qtd').val()) * parseFloat($('#price').val()));
+ });
+</script>
+</html>

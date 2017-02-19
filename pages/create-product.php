@@ -1,11 +1,15 @@
 <?php 
-
-require '../Class/Product.php';
+// CHAMAR CLASSE DO BBANCO DE DADOS
+require '../Class/Database.php';
 require '../Class/Config.php';
+require '../Class/Type.php';
 
-$product = new Product();
+
 $config = new Config();
+$type = new Type();
 
+$types = $type->getList();
+$row =  mysqli_num_rows($types);
 ?>
 
 
@@ -25,12 +29,12 @@ $config = new Config();
 
   <h1>Cadastrar Produto</h1>
 
-  <form action="<?=  $config->baseUrl('pages/store-customer') ?>" method="POST">
+  <form action="<?=  $config->baseUrl('pages/store-product') ?>" method="POST">
 
     <div class="row">
 
 
-      <div class="col-md-9">
+      <div class="col-md-7">
 
         <div class="form-group">
 
@@ -46,45 +50,30 @@ $config = new Config();
 
         <div class="form-group">
 
-          <label for="">Documento</label>
-          <input type="text" class="form-control" name="document" required>
+          <label for="">Tipo</label>
+          <select class="form-control" name="types_id" required>
+            <option></option>
+            <?php while($row = mysqli_fetch_assoc($types)):?>
+              <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+            <?php endwhile ?>
+          </select>
 
         </div>
 
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-2">
 
         <div class="form-group">
 
-          <label for="">Email</label>
-          <input type="email" class="form-control" name="email">
+          <label for="">Valor</label>
+          <input type="number" class="form-control" name="price">
 
         </div>
 
       </div>
 
-      <div class="col-md-4">
-
-        <div class="form-group">
-
-          <label for="">Telefone</label>
-          <input type="text" class="form-control" name="phone">
-
-        </div>
-
-      </div>
-
-      <div class="col-md-4">
-
-        <div class="form-group">
-
-          <label for="">Endereço</label>
-          <input type="text" class="form-control" name="addres">
-
-        </div>
-
-      </div>
+      
 
       <div class="col-md-12">
 
@@ -108,5 +97,5 @@ $config = new Config();
 
 
 
- <?php  include('../layout/scripts.php') ?>
+<?php  include('../layout/scripts.php') ?>
 </html>

@@ -1,6 +1,7 @@
 <?php 
 
-
+// CHAMAR CLASSE DO BBANCO DE DADOS
+require '../Class/Database.php';
 //REQUIRE DE CLASSES
 require '../Class/Config.php';
 require '../Class/Type.php';

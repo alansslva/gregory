@@ -1,9 +1,18 @@
 <?php 
 
-// CHAMAR CLASSE DO BBANCO DE DADOS
-require '../Class/Database.php';
 
 class Type{
+
+
+	function getList(){
+		$database = new Database();
+
+		$sql =  'SELECT * FROM types';
+
+		$result = $database->transaction($sql);
+
+		return $result;
+	}
 
 
 	function store($name){

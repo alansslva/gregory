@@ -15,9 +15,11 @@ class Database {
 	function transaction($sql){
 		$con = $this->connection();
 
-		mysqli_query($con,$sql);
+		$result = mysqli_query($con,$sql);
 
 		mysqli_close($con); 
+
+		return $result;
 	}
 
 }
